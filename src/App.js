@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Button } from 'semantic-ui-react';
-import Conthijo from './components/Conthijo';
+import {fetchPeople} from './actions/peopleActions'; 
 import { connect } from 'react-redux';
-import { counterIncrement, counterDecrement } from './actions/counterAction' 
+
+
 class App extends Component {
  
   constructor(props) {
@@ -24,7 +25,7 @@ class App extends Component {
    
   }
   
-  render() { 
+  render() { console.log("People:" + JSON.stringify(this.props.randompeople.people));
     return ( 
       <div className="App">
         <header className="App-header">
@@ -35,9 +36,9 @@ class App extends Component {
         <p className="App-intro">
         
           To get started, edit <code>src/App.js</code> and save to reload.
-          Contador padre : {this.props.countst}
-          <Conthijo  /> 
-        <p>  <Button onClick={this.props.counterIncrement} >Suma contador</Button> </p>
+          
+         
+        <p>  <Button onClick={this.props.fetchPeople} >Llama API</Button> </p>
         </p>
       </div>
     );
@@ -46,10 +47,10 @@ class App extends Component {
 
 function mapStateToProps(state){
   return{
-    countst: state.count1
+    randompeople: state
   }
 }
 
 
-export default connect(mapStateToProps, {counterIncrement, counterDecrement})(App);
+export default connect(mapStateToProps, {fetchPeople})(App);
 
