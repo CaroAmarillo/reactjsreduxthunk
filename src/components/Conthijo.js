@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 
 import '../App.css';
 import Contnieto from './Contnieto';
+import { connect } from 'react-redux';
 
 
 class Conthijo extends Component {
  
   constructor(props) {
-    super(props);
-
-      
+    super(props);      
       }
 
 
@@ -22,14 +21,22 @@ class Conthijo extends Component {
 
        <p className="App-intro"> 
          
-          Contador Hijo: {this.props.conta}
+          Contador Hijo: {this.props.countst}
           
           
         </p>
-        <p><Contnieto conta={this.props.conta} /> </p>
+        <p><Contnieto  /> </p>
       </div>
     );
   }
 }
 
-export default Conthijo;
+
+
+function mapStateToProps(state){
+  return{
+    countst: state.count1
+  }
+}
+
+export default connect(mapStateToProps, {})( Conthijo);

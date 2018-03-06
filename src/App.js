@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Button } from 'semantic-ui-react'
-import Conthijo from './components/Conthijo'
-
+import { Button } from 'semantic-ui-react';
+import Conthijo from './components/Conthijo';
+import { connect } from 'react-redux';
+import { counterIncrement, counterDecrement } from './actions/counterAction' 
 class App extends Component {
  
   constructor(props) {
@@ -23,8 +24,8 @@ class App extends Component {
    
   }
   
-  render() {
-    return (
+  render() { 
+    return ( 
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
@@ -32,14 +33,23 @@ class App extends Component {
         </header>
 
         <p className="App-intro">
+        
           To get started, edit <code>src/App.js</code> and save to reload.
-          Contador padre : {this.state.contador}
-          <Conthijo conta={this.state.contador} /> 
-        <p>  <Button onClick={this.sumacontador} >Suma contador</Button> </p>
+          Contador padre : {this.props.countst}
+          <Conthijo  /> 
+        <p>  <Button onClick={this.props.counterIncrement} >Suma contador</Button> </p>
         </p>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps(state){
+  return{
+    countst: state.count1
+  }
+}
+
+
+export default connect(mapStateToProps, {counterIncrement, counterDecrement})(App);
+
