@@ -24,8 +24,16 @@ class App extends Component {
     this.setState({contador: this.state.contador + 1});
    
   }
+
+  llamoApi = () =>{
+    if (this.props.randompeople.isFetching===false) {
+    this.props.fetchPeople()} else {alert("no se puede todavia") };
+   
+  }
+  
   
   render() { console.log("People:" + JSON.stringify(this.props.randompeople.people));
+  console.log("isfeteching:"+this.props.randompeople.isFetching);
     return ( 
       <div className="App">
         <header className="App-header">
@@ -38,7 +46,11 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
           
          
-        <p>  <Button onClick={this.props.fetchPeople} >Llama API</Button> </p>
+        <p>  <Button onClick={ () => this.llamoApi() } >Llama API</Button> </p>
+
+{/* <Button onClick={ () => {this.props.randompeople.isFetching===false ? 
+    this.props.fetchPeople() : alert("no se puede todavia") } } >Llama API</Button> </p>*/}
+    
         </p>
       </div>
     );
