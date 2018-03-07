@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Button } from 'semantic-ui-react';
+import { Button, List, Image } from 'semantic-ui-react';
 import {fetchPeople} from './actions/peopleActions'; 
 import { connect } from 'react-redux';
 
@@ -30,6 +30,11 @@ class App extends Component {
     this.props.fetchPeople()} else {alert("no se puede todavia") };
    
   }
+
+  masinfo = (calle, ciudad) =>{
+    alert("Calle:" + calle + " Ciudad: " + ciudad) ;
+   
+  }
   
   
   render() { console.log("People:" + JSON.stringify(this.props.randompeople.people));
@@ -50,8 +55,23 @@ class App extends Component {
 
 {/* <Button onClick={ () => {this.props.randompeople.isFetching===false ? 
     this.props.fetchPeople() : alert("no se puede todavia") } } >Llama API</Button> </p>*/}
-    
+
         </p>
+        <List>
+           {this.props.randompeople.people.map( (m) => 
+ 
+ <List.Item>
+   <Image avatar src={m.picture.thumbnail} onClick={ () => this.masinfo(m.location.street,m.location.city) } />
+   <List.Content>
+     <List.Header as='a'>{m.name.first}</List.Header>
+     <List.Description>email <a><b>{m.email}</b></a> </List.Description>
+   </List.Content>
+ </List.Item>
+ 
+
+    )}
+    </List>
+
       </div>
     );
   }
